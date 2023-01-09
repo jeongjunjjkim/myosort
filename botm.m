@@ -171,7 +171,7 @@ if P.Results.refDur > 0
         s(spkIdx{un}) = 1;
     
         % detect putative refractory period violations
-        y = double(smooth1D(s,Fs,'box','wid',P.Results.refDur/2,'dim',2));
+        y = double(smooth1D(s,Fs,'box','boxDur',P.Results.refDur/2,'dim',2));
         y = y.*(y>0.5);
         
         dy = [NaN,diff(y)];
@@ -228,7 +228,7 @@ if P.Results.sic && nnz(~cellfun(@isempty,spkIdx)) > 1
     [s,sFilt] = deal(zeros(nUnit,nDataPoints));
     for un = 1:nUnit
         s(un,spkIdx{un}) = 1;
-        sFilt(un,:) = double(smooth1D(s(un,:),Fs,'box','wid',waveLen/Fs,'dim',2) > 0.5);
+        sFilt(un,:) = double(smooth1D(s(un,:),Fs,'box','boxDur',waveLen/Fs,'dim',2) > 0.5);
     end
     
     % create spike IDs (index and unit number)
@@ -310,7 +310,7 @@ if nargout > 2 || ismember('resen',P.Results.plot)
     
     % identify spike regions
     allSpk = findpulses(X,Fs,'dim',1,'OutputFormat','logical');
-    spkRegion = smooth1D(double(allSpk),Fs,'box','wid',waveLen/(2*Fs),'dim',1);
+    spkRegion = smooth1D(double(allSpk),Fs,'box','boxDur',waveLen/(2*Fs),'dim',1);
     
     resEner = cell(1,2);
     resEner(:) = {zeros(nUnit,nChan)};

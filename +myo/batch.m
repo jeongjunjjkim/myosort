@@ -16,7 +16,7 @@ spkIdx = double(Spk.detect);
 % create buffers around each spike
 s = zeros(1,nSamp);
 s(spkIdx) = 1;
-spkBuff = smooth1D(s,opt.Fs,'box','wid',2*opt.waveformDuration(2));
+spkBuff = smooth1D(s,opt.Fs,'box','boxDur',2*opt.waveformDuration(2));
 spkBuff = spkBuff>0.5;
 
 % identify batch limits as transition points between spike buffers

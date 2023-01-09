@@ -24,7 +24,7 @@ for iBatch = 1:nBatches
     Y = Y .* (Y > opt.detectThreshold);
     
     % filter
-    Y = smooth1D(mean(Y,1),opt.Fs,'gau','dim',2,'sd',5e-4);
+    Y = smooth1D(mean(Y,1),opt.Fs,'gau','dim',2,'gauSd',5e-4);
     
     % find pulses
     [~,spkIdx{iBatch}] = findpeaks(Y,'MinPeakHeight',1);

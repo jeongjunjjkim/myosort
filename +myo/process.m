@@ -3,7 +3,8 @@
 function [X,opt] = process(X,opt)
 
 % filter data
-n = opt.FilterOrder;
+n = opt.filterOrder;
+Fs = opt.Fs;
 if isfinite(opt.filterLowCut) && ~isfinite(opt.filterHighCut)
     Wn = opt.filterLowCut;
     filtType = 'high';
